@@ -1,19 +1,19 @@
 ---
-- name: (Debian/Ubuntu) Install dependencies
-  apt:
+- name: Install dependencies (Debian/Ubuntu)
+  ansible.builtin.apt:
     name:
       - gnupg
       - apt-transport-https
     state: present
 
-- name: (Debian/Ubuntu) Add Elasticsearch repository GPG key
-  apt_key:
+- name: Add Elasticsearch repository GPG key (Debian/Ubuntu)
+  ansible.builtin.apt_key:
     url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
     state: present
   tags: install
 
-- name: (Debian/Ubuntu) Add Elasticsearch 7.X repository
-  apt_repository:
+- name: Add Elasticsearch 7.X repository (Debian/Ubuntu)
+  ansible.builtin.apt_repository:
     repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
     filename: elastic-repo.list
     update_cache: yes

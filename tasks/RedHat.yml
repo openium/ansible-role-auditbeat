@@ -1,6 +1,6 @@
 ---
-- name: (REHL/CentOS) Add Elasticsearch 7.X repository
-  yum_repository:
+- name: Add Elasticsearch 7.X repository (REHL/CentOS)
+  ansible.builtin.yum_repository:
     name: "elastic-7.x"
     description: "Elastic repository for 7.x packages"
     baseurl: "https://artifacts.elastic.co/packages/7.x/yum"

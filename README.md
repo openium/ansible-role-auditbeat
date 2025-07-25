@@ -225,11 +225,10 @@ MIT
 Author Information
 ------------------
 
+Originally created in 2019 by 
+
 j91321
 
 Rules by: bfuzzy
 
-Notes
------
-
-Tests require some further improvements. Waiting for beats issue [#8280](https://github.com/elastic/beats/issues/8280) to be resolved for better tests.
+Fork by: Openium

@@ -33,3 +33,5 @@ auditbeat_module_windows:
     datasets:
       - host
       - process
+
+auditbeat_service: "{{ _auditbeat_service_defaults | combine(hostvars[inventory_hostname].auditbeat_service | default({}), recursive=True) }}"

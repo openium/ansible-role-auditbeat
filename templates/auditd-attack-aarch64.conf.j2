@@ -1,0 +1,20 @@
+# auditd-attack-aarch64.conf
+# Version ARM64 compatible — règles minimales
+
+# Audit log monitoring
+-w /var/log/audit/ -k audit-log
+
+# Audit configuration changes
+-w /etc/audit/ -p wa -k audit_config
+-w /etc/auditbeat/ -p wa -k auditbeat_config
+
+# Basic module loading
+-a always,exit -F perm=x -F auid!=-1 -F path=/sbin/insmod -k module_load
+-a always,exit -F perm=x -F auid!=-1 -F path=/sbin/modprobe -k module_load
+
+# Track execve (exécutions de commandes)
+-a always,exit -F arch=b64 -S execve -k exec_monitor
+-a always,exit -F path=/usr/bin/bash -F perm=x -F auid>=500 -F auid!=4294967295 -k shell_exec
+
+# File integrity changes in /etc
+-w /etc/ -p wa -k etc_monitor

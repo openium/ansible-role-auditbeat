@@ -66,6 +66,15 @@
   when: ansible_os_family == "Gentoo"
   tags: install
 
+- name: Deploy ARM64-compatible auditd rules (Linux aarch64)
+  ansible.builtin.template:
+    src: auditd-attack-aarch64.conf.j2
+    dest: /etc/auditbeat/audit.rules.d/auditd-attack-aarch64.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_os_family != "Windows" and ansible_architecture == 'aarch64' and auditbeat_module.auditd.enabled
+
 - name: Create auditbeat configuration file (Linux)
   ansible.builtin.template:
     src: auditbeat.yml.j2

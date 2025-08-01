@@ -5,7 +5,7 @@ auditbeat.modules:
 {% if auditbeat_module.auditd.enabled | bool %}
 - module: auditd
   # Load audit rules from separate files. Same format as audit.rules(7).
-  audit_rule_files: [ '${path.config}/audit.rules.d/*.conf' ]
+  audit_rule_files: [ {% if ansible_architecture == 'aarch64' %}'${path.config}/audit.rules.d/auditd-attack-aarch64.conf'{% else %}'${path.config}/audit.rules.d/*.conf'{% endif %} ]
 {% endif %}
 {% if auditbeat_module.file_integrity.enabled | bool %}
 - module: file_integrity

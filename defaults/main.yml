@@ -18,10 +18,45 @@ auditbeat_output:
       enabled: false
 
 auditbeat_processors: |
-  - add_host_metadata: ~
-  - add_cloud_metadata: ~
-  - add_docker_metadata: ~
+  - add_host_metadata: {}
+  - add_cloud_metadata: {}
+  - add_docker_metadata: {}
 
 auditbeat_portage:
   package: =auditbeat-{{ auditbeat_service.version }}
   getbinpkg: no
+
+auditbeat_module:
+  auditd:
+    enabled: true
+  file_integrity:
+    enabled: true
+    paths:
+      - /bin
+      - /usr/bin
+      - /sbin
+      - /usr/sbin
+      - /etc
+  system:
+    enabled: true
+    datasets:
+      - host
+      - login
+      - package
+      - process
+      - socket
+      - user
+
+auditbeat_module_windows:
+  file_integrity:
+    enabled: true
+    paths:
+      - C:\windows
+      - C:\windows\system32
+      - C:\Program Files
+      - C:\Program Files (x86)
+  system:
+    enabled: true
+    datasets:
+      - host
+      - process
